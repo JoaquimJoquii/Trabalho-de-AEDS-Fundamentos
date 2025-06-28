@@ -1,7 +1,7 @@
 # Trabalho-de-AEDS-Fundamentos
 
-# Estrutura do projeto
-    projeto/
+## Estrutura do projeto
+projeto/
 ├── codigo/                    # Código-fonte em C (.c e .h)
 │   ├── main.c              # Menu principal e fluxo do programa
 │   ├── produto.c
