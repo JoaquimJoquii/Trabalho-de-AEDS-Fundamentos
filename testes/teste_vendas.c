@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include "../testes/munit/munit.h"
+#include "./munit/munit.h"
 
 int main(){
 
     system("pause");
     return 0;
 }
+
