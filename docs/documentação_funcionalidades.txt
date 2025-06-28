@@ -1,0 +1,31 @@
+DOCUMENTAÇÃO DAS FUNCIONALIDADES ESPERADAS PARA O SISTEMA:
+
+*Cadastro de Compradores*: a funcionalidade deve permitir o cadastro, remoção, edição e apresentação dos objetos compradores cadastrados em "../arquivos/compradores.txt" de modo que os objetos já cadastrados não sejam afetados
+
+funções subordinadas à funcionalidade(assinatura dos métodos): 
+    apresentarCompradores(): a função deve apresentar todos os compradores já cadastrados nos arquivos.txt do projeto, ordenando-os de modo organizado e visualmente agradável.
+
+    deletarCompradores(int id): a função deve deletar o comprador selecionado e apenas ele de dentro dos arquivos.txt do projeto
+
+    cadastrarCompradores(int quant): a função deve adicionar um novo comprador para dentro do arquivo.txt do projeto. Cada novo comprador teve ter um id único para facilitar a sua seleção
+
+    editarCompradores(int id): a função deve capturar um comprador em especifico de dentro do arquivo.txt usando do id e alterar seus dados
+-------------------------------------------------------------
+*Cadastro de Venda*: 
+
+funções subordinadas à funcionalidade(assinatura dos métodos):
+
+-------------------------------------------------------------
+*Cadastro de Produtos*: 
+
+funções subordinadas à funcionalidade(assinatura dos métodos):
+
+-------------------------------------------------------------
+*Cadastro de Vendedores*: 
+
+funções subordinadas à funcionalidade(assinatura dos métodos):
+
+-------------------------------------------------------------
+*Emissão de Nota Fiscal e Cálculo de frete*: 
+
+funções subordinadas à funcionalidade(assinatura dos métodos):

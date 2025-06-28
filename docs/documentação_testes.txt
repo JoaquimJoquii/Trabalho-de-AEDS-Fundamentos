@@ -1,0 +1,3 @@
+FUNCIONALIDADE: Cadastro de Compradores
+CASO 1: Arquivo vazio
+    

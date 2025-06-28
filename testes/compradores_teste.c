@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../codigo/vendas.h"
+#include "../codigo/compradores.h"
 #include "./munit/munit.h"
 
 int main(){
