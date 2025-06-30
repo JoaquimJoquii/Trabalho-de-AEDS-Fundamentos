@@ -1,8 +1,6 @@
 #ifndef COMPRADORES_H
 #define COMPRADORES_H
 
-
-
 void apresentarCompradores();
 
 void deletarCompradore(int id);

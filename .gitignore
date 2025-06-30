@@ -1,5 +1,5 @@
 # Ignora os arquivo executaveis da pasta build
-build/
+*build/
 *.exe
 *.o
 *output/
