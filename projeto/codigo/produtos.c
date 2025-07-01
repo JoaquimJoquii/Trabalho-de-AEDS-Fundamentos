@@ -73,3 +73,18 @@ int excluirProduto(Produto produtos[], int *qtdProdutos, int codigo) {
     (*qtdProdutos)--;
     return 1;
 }
+
+// Função: listarProdutos
+void listarProdutos(Produto produtos[], int qtdProdutos) {
+    if (qtdProdutos == 0) {
+        printf("Nenhum produto cadastrado.\n");
+        return;
+    }
+
+    printf("\n=== Lista de Produtos ===\n");
+    for (int i = 0; i < qtdProdutos; i++) {
+        printf("Nome: %s | Código: %d | Quantidade: %d | Preço: R$%.2f\n",
+               produtos[i].nome, produtos[i].codigo,
+               produtos[i].quantidade, produtos[i].preco);
+    }
+}
