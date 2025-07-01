@@ -21,12 +21,12 @@ float calcularFrete(float valor) {
 }
 
 int gerarCodigo() {
-    FILE *arquivo = fopen("codigo.txt", "r+");  // abre para leitura/escrita
+    FILE *arquivo = fopen("../../arquivos/codigo.txt", "r+");  // abre para leitura/escrita
     int codigo;
 
     // Se o arquivo não existe, cria e começa do 1
     if (arquivo == NULL) {
-        arquivo = fopen("codigo.txt", "w");
+        arquivo = fopen("../../arquivos/codigo.txt", "w");
         if (arquivo == NULL) {
             printf("Erro ao criar arquivo!\n");
             return -1;
@@ -38,7 +38,7 @@ int gerarCodigo() {
     }
 
     // Reabre o arquivo para sobrescrever com o novo valor
-    freopen("codigo.txt", "w", arquivo);
+    freopen("../../arquivos/codigo.txt", "w", arquivo);
     fprintf(arquivo, "%d", codigo);
     fclose(arquivo);
 
@@ -51,8 +51,8 @@ void alterarVenda() {
     // Solicita o código da venda a ser editada
     scanf("%d", &codigoAlvo);
     // Abre o arquivo original e um temporário para escrita
-    FILE *temp = fopen("temp.txt", "w");
-    FILE *original = fopen("vendas.txt", "r");
+    FILE *temp = fopen("../../arquivos/temp.txt", "w");
+    FILE *original = fopen("../../arquivos/vendas.txt", "r");
 
     if (original == NULL || temp == NULL) {
         printf("Erro ao abrir os arquivos!\n");
@@ -86,8 +86,8 @@ void alterarVenda() {
     // Remove o arquivo original e renomeia o temporário para o nome original
     fclose(original);
     fclose(temp);
-    remove("vendas.txt");
-    rename("temp.txt", "vendas.txt");
+    remove("../../arquivos/vendas.txt");
+    rename("../../arquivos/temp.txt", "../../arquivos/vendas.txt");
     // Se a venda foi encontrada, solicita os novos dados e escreve no arquivo
     // Se não, informa que a venda não foi encontrada
     if (!vendaEncontrada) {
@@ -99,7 +99,7 @@ void alterarVenda() {
     // Recria a venda com mesmo código
     printf("Insira os novos dados para a venda de codigo %d.\n", codigoAlvo);
 
-    FILE *vendasAtualizadas = fopen("vendas.txt", "a");
+    FILE *vendasAtualizadas = fopen("../../arquivos/vendas.txt", "a");
 
     if (vendasAtualizadas == NULL) {
         printf("Erro ao abrir arquivo para escrita.\n");
@@ -167,8 +167,8 @@ void deletarVenda() {
     printf("Digite o codigo da venda que deseja deletar: ");
     scanf("%d", &codigoAlvo);
 
-    FILE *temp = fopen("temp.txt", "w");
-    FILE *original = fopen("vendas.txt", "r");
+    FILE *temp = fopen("../../arquivos/temp.txt", "w");
+    FILE *original = fopen("../../arquivos/vendas.txt", "r");
 
     if (original == NULL || temp == NULL) {
         printf("Erro ao abrir os arquivos!\n");
@@ -202,8 +202,8 @@ void deletarVenda() {
     // Remove o arquivo original e renomeia o temporário para o nome original
     fclose(original);
     fclose(temp);
-    remove("vendas.txt");
-    rename("temp.txt", "vendas.txt");
+    remove("../../arquivos/vendas.txt");
+    rename("../../arquivos/temp.txt", "../../arquivos/vendas.txt");
     // Informa se a venda foi encontrada e removida ou não
     if (vendaEncontrada)
         printf("Venda removida com sucesso.\n");
@@ -214,7 +214,7 @@ void deletarVenda() {
 }
 
 void listarVendas() {
-    vendas = fopen("vendas.txt", "r");
+    vendas = fopen("../../arquivos/vendas.txt", "r");
     if (vendas == NULL) {
         printf("Erro ao abrir o arquivo de vendas.\n");
         return;
@@ -236,7 +236,7 @@ void novaVenda() {
     char nome[100];
     float un, total, totalItens = 0, frete;
 
-    vendas = fopen("vendas.txt", "a");
+    vendas = fopen("../../arquivos/vendas.txt", "a");
     if (vendas == NULL) {
         printf("Erro ao abrir/criar o arquivo!\n");
         return;
