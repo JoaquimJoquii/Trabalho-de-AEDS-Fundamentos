@@ -35,3 +35,21 @@ int consultarProduto(Produto produtos[], int qtdProdutos, int codigo) {
     printf("Produto não encontrado.\n");
     return 0;
 }
+
+// Função: alterarProduto
+int alterarProduto(Produto produtos[], int qtdProdutos, Produto produtoAtualizado) {
+    int indice = -1;
+    for (int i = 0; i < qtdProdutos; i++) {
+        if (produtos[i].codigo == produtoAtualizado.codigo) {
+            indice = i;
+            break;
+        }
+    }
+
+    if (indice == -1) return 0;
+
+    strcpy(produtos[indice].nome, produtoAtualizado.nome);
+    produtos[indice].quantidade = produtoAtualizado.quantidade;
+    produtos[indice].preco = produtoAtualizado.preco;
+    return 1;
+}
