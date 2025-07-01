@@ -2,10 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include "compradores.h"
+#include "nota.h"
 
 int main(){
-    apresentarCompradores();
-    
+    menuVendas();
     system("pause");
     return 0;
 }
