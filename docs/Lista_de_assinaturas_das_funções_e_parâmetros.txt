@@ -24,6 +24,10 @@ funções subordinadas à funcionalidade(assinatura dos métodos):
     deletarProduto(int codigo): A função deve remover o produto selecionado do arquivo "produtos.txt" utilizando seu código como identificador único, garantindo que apenas esse produto seja excluído sem alterar os demais registros.
 
     editarProduto(int codigo): A função deve localizar um produto específico no arquivo "produtos.txt" com base no seu codigo e permitir a atualização dos seus dados (nome, quantidade e preço), mantendo o mesmo identificador após a modificação.
+
+    consultarProduto(int codigo): A função deve buscar e exibir as informações de um produto específico no sistema utilizando seu codigo como identificador único. Caso o produto não seja encontrado, deve retornar uma mensagem informando que o produto não está cadastrado.
+
+    listarProdutos(): A função deve apresentar todos os produtos já cadastrados no arquivo "produtos.txt", exibindo-os em uma lista ordenada e formatada de maneira clara e visualmente agradável, mostrando nome, código, quantidade em estoque e preço de venda.
 -------------------------------------------------------------
 *Cadastro de Vendedores*: 
 

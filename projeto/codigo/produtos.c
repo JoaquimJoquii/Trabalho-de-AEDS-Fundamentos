@@ -53,3 +53,23 @@ int alterarProduto(Produto produtos[], int qtdProdutos, Produto produtoAtualizad
     produtos[indice].preco = produtoAtualizado.preco;
     return 1;
 }
+
+// Função: excluirProduto
+int excluirProduto(Produto produtos[], int *qtdProdutos, int codigo) {
+    int indice = -1;
+    for (int i = 0; i < *qtdProdutos; i++) {
+        if (produtos[i].codigo == codigo) {
+            indice = i;
+            break;
+        }
+    }
+
+    if (indice == -1) return 0;
+
+    for (int i = indice; i < *qtdProdutos - 1; i++) {
+        produtos[i] = produtos[i + 1];
+    }
+
+    (*qtdProdutos)--;
+    return 1;
+}
