@@ -275,23 +275,22 @@ void editarCompradores(char nome[MAX_NOME])
     }
 }
 
-void deletarCompradores(char nome[MAX_NOME])
-{
+void deletarCompradores(char nome[MAX_NOME]){
     FILE *ptr = fopen("../../arquivos/compradores.txt", "r");
     FILE *temp = fopen("../../arquivos/temp.txt", "w");
 
-    if (ptr == NULL || temp == NULL)
-    {
+    if (ptr == NULL || temp == NULL){
         printf("Erro ao abrir arquivos\n");
         exit(1);
     }
 
     char linha[MAX_NOME];
-    int find=0;
+    int find=0, cont=0;
 
     while(fgets(linha, sizeof(linha), ptr) != NULL){
         if (strcmp(linha, nome) == 0){
-            find = 1;
+            cont++;
+            find++;
             fprintf(temp, "%s", "");
             for (int i=0; i<7; i++){
                 if (fgets(linha, sizeof(linha), ptr) != NULL){
@@ -300,6 +299,7 @@ void deletarCompradores(char nome[MAX_NOME])
             }
         }else{
             fprintf(temp, "%s", linha);
+            cont++;
             for (int i = 0; i < 7; i++){
                 if (fgets(linha, sizeof(linha), ptr) != NULL){
                     fprintf(temp, "%s", linha);
@@ -307,17 +307,22 @@ void deletarCompradores(char nome[MAX_NOME])
             }
         }
     }
-
+    
     fclose(ptr);
     fclose(temp);
 
-    if (!find){
-        printf("Comprador nao encontrado!\n");
-        remove("../../arquivos/temp.txt");
+    if(cont==0){
+        printf("Não existem compradores registrados no arquivo");
+    }else{
+        if (!find){
+            printf("Comprador nao encontrado!\n");
+            remove("../../arquivos/temp.txt");
+        }
+        else{
+            remove("../../arquivos/compradores.txt");
+            rename("../../arquivos/temp.txt", "../../arquivos/compradores.txt");
+            printf("Comprador deletado com sucesso!\n");
+        }
     }
-    else{
-        remove("../../arquivos/compradores.txt");
-        rename("../../arquivos/temp.txt", "../../arquivos/compradores.txt");
-        printf("Comprador deletado com sucesso!\n");
-    }
+
 }
