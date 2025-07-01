@@ -4,8 +4,14 @@
 #include "compradores.h"
 
 int main(){
+    char nome[100];
+
+    printf("Qual nome do comprador que deseja deletar? ");
+    fgets(nome, MAX_NOME, stdin);
+    deletarCompradores(nome);
+
     apresentarCompradores();
     
-    system("pause");
+
     return 0;
 }

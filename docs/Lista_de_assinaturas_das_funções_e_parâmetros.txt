@@ -5,11 +5,11 @@ DOCUMENTAÇÃO DAS FUNCIONALIDADES ESPERADAS PARA O SISTEMA:
 funções subordinadas à funcionalidade(assinatura dos métodos): 
     apresentarCompradores(): a função deve apresentar todos os compradores já cadastrados nos arquivos.txt do projeto, ordenando-os de modo organizado e visualmente agradável.
 
-    deletarCompradores(int id): a função deve deletar o comprador selecionado e apenas ele de dentro dos arquivos.txt do projeto
+    deletarCompradores(char nome[100]): a função deve deletar o comprador selecionado e apenas ele de dentro dos arquivos.txt do projeto
 
     cadastrarCompradores(int quant): a função deve adicionar um novo comprador para dentro do arquivo.txt do projeto. Cada novo comprador teve ter um id único para facilitar a sua seleção
 
-    editarCompradores(int id): a função deve capturar um comprador em especifico de dentro do arquivo.txt usando do id e alterar seus dados
+    editarCompradores(char nome[100]): a função deve capturar um comprador em especifico de dentro do arquivo.txt usando do id e alterar seus dados
 -------------------------------------------------------------
 *Cadastro de Venda*: 
 
