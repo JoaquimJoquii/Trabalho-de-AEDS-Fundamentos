@@ -184,49 +184,49 @@ void editarCompradores(char nome[MAX_NOME])
 
             char alteracao[MAX_NOME];
 
-            printf("Novo nome: ", cliente.nome);
+            printf("Novo nome: ");
             fgets(alteracao, MAX_NOME, stdin);
             if (strlen(alteracao) > 1)
             { // caso haja algum caractere digitado pelo usuario o valor e substituido em cliente.nome
                 strcpy(cliente.nome, alteracao);
             }
-            printf("Novo CPF: ", cliente.cpf);
+            printf("Novo CPF: ");
             fgets(alteracao, MAX_CPF, stdin);
-            if (strlen(alteracao) > 1)
+            if (strlen(alteracao) > 1)//se o user nao entrar com valores o valor continua o mesmo
             {
                 strcpy(cliente.cpf, alteracao);
             }
-            printf("Novo email: ", cliente.email);
+            printf("Novo email: ");
             fgets(alteracao, MAX_NOME, stdin);
             if (strlen(alteracao) > 1)
             {
                 strcpy(cliente.email, alteracao);
             }
-            printf("Novo Estado: ", cliente.endEntrega.estado);
+            printf("Novo Estado: ");
             fgets(alteracao, MAX_ENDERECO, stdin);
             if (strlen(alteracao) > 1)
             {
                 strcpy(cliente.endEntrega.estado, alteracao);
             }
-            printf("Nova cidade: ", cliente.endEntrega.cidade);
+            printf("Nova cidade: ");
             fgets(alteracao, MAX_ENDERECO, stdin);
             if (strlen(alteracao) > 1)
             {
                 strcpy(cliente.endEntrega.cidade, alteracao);
             }
-            printf("Novo bairro: ", cliente.endEntrega.bairro);
+            printf("Novo bairro: ");
             fgets(alteracao, MAX_ENDERECO, stdin);
             if (strlen(alteracao) > 1)
             {
                 strcpy(cliente.endEntrega.bairro, alteracao);
             }
-            printf("Nova rua: ", cliente.endEntrega.rua);
+            printf("Nova rua: ");
             fgets(alteracao, MAX_ENDERECO, stdin);
             if (strlen(alteracao) > 1)
             {
                 strcpy(cliente.endEntrega.rua, alteracao);
             }
-            printf("Novo CEP: ", cliente.endEntrega.cep);
+            printf("Novo CEP: ");
             fgets(alteracao, MAX_ENDERECO, stdin);
             if (strlen(alteracao) > 1)
             {
@@ -286,7 +286,6 @@ void deletarCompradores(char nome[MAX_NOME])
         exit(1);
     }
 
-    compradores cliente;
     char linha[MAX_NOME];
     int find=0;
 
