@@ -293,7 +293,7 @@ void novaVenda() {
     system("pause");
 }
 
-int main() {
+int menuVendas() {
     int opcao;
     do {
         printf("\n===== MENU =====\n");
