@@ -3,8 +3,6 @@
 #ifndef PRODUTOS_H
 #define PRODUTOS_H
 
-#include <stdio.h>
-
 // Definição da estrutura Produto
 typedef struct {
     char nome[100];
