@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct endereco
-{
+typedef struct endereco{
     char rua[MAX_ENDERECO];
     char bairro[MAX_ENDERECO];
     char cidade[MAX_ENDERECO];
@@ -12,8 +11,7 @@ typedef struct endereco
     char cep[MAX_ENDERECO];
 } endereco;
 
-typedef struct compradores
-{
+typedef struct compradores{
     int id;
     char nome[MAX_NOME];
     char cpf[MAX_CPF];
