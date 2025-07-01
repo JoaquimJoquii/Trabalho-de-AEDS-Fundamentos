@@ -19,3 +19,19 @@ int cadastrarProduto(Produto produtos[], int *qtdProdutos, Produto novoProduto) 
     (*qtdProdutos)++;
     return 1;
 }
+
+// Função: consultarProduto
+int consultarProduto(Produto produtos[], int qtdProdutos, int codigo) {
+    for (int i = 0; i < qtdProdutos; i++) {
+        if (produtos[i].codigo == codigo) {
+            printf("Produto encontrado:\n");
+            printf("Nome: %s\n", produtos[i].nome);
+            printf("Código: %d\n", produtos[i].codigo);
+            printf("Quantidade: %d\n", produtos[i].quantidade);
+            printf("Preço: %.2f\n", produtos[i].preco);
+            return 1;
+        }
+    }
+    printf("Produto não encontrado.\n");
+    return 0;
+}
