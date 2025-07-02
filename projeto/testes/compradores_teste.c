@@ -64,9 +64,8 @@ static MunitResult editar_arquivo_vazio(const MunitParameter params[], void* fix
     assert_int( deletarCompradores(NOME), ==, 1);//compara o retorno da função com o resultado esperado
     return MUNIT_OK;
 }
-static MunitResult editar_sucesso(const MunitParameter params[], void* fixture){
-
-    //abrindo um arquivo em branco e preenchendo ele com um comprador generico
+static MunitResult editar_sucesso(const MunitParameter params[], void* fixture) {
+    // Cria arquivo de compradores com um comprador genérico
     FILE *ptr = fopen("../../arquivos/compradores.txt", "w");
     assert_not_null(ptr);
 
@@ -76,11 +75,28 @@ static MunitResult editar_sucesso(const MunitParameter params[], void* fixture){
     }
     fclose(ptr);
 
+    // Cria arquivo temporário com os dados de edição simulando o input do usuário
+    FILE *input = fopen("input_temp.txt", "w");
+    assert_not_null(input);
+    // Preencha com os novos dados (um por linha, como o usuário digitaria)
+    fprintf(input, "novo_nome\nnovo_cpf\nnovo_email\nnovo_estado\nnova_cidade\nnovo_bairro\nnova_rua\nnovo_cep\n");
+    fclose(input);
+
+    // Redireciona stdin para o arquivo temporário
+    freopen("input_temp.txt", "r", stdin);
+
+    // Chama a função que pede entrada do usuário
     int m = editarCompradores(NOME);
+
+    // Volta stdin ao normal (opcional)
+    freopen("CON", "r", stdin); // No Windows
+
+    // Remove o arquivo temporário
+    remove("input_temp.txt");
 
     assert_int(m, ==, 0);
     return MUNIT_OK;
-}//------------------------->retirar a entrada de dados
+}
 static MunitResult editar_inexistente(const MunitParameter params[], void* fixture) {
     //Cria arquivo com dados de teste 
     FILE *ptr = fopen("../../arquivos/compradores.txt", "w");
@@ -134,10 +150,25 @@ static MunitResult cadastro_entrada_invalida(const MunitParameter params[], void
     return MUNIT_OK;
 }
 static MunitResult cadastro_sucesso(const MunitParameter params[], void* fixture) {
+    // Crie um arquivo temporário com os dados que seriam digitados
+    FILE *input = fopen("input_temp.txt", "w");
+    assert_not_null(input);
+    fprintf(input, "teste\n123456789\nemail@teste.com\nEstado\nCidade\nBairro\nRua\n12345-678\n");
+    fclose(input);
 
+    // Redirecione stdin para esse arquivo
+    freopen("input_temp.txt", "r", stdin);
+
+    // Agora a função vai ler do arquivo como se fosse o teclado
     assert_int(cadastrarCompradores(1), ==, 0);
+
+    // Volte stdin ao normal se quiser (opcional)
+    freopen("CON", "r", stdin); // No Windows, "CON" é o console
+
+    remove("input_temp.txt"); // Limpe o arquivo temporário
+
     return MUNIT_OK;
-}//retirar a entrada de dados------------------------->
+}
 
 //array de cadastrar
 static MunitTest cadastrar_testes[] = {
