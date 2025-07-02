@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build test_produtos",
+			"command": "gcc ../codigo/produtos.c test_produtos.c munit/munit.c -I../codigo -Imunit -o test_produtos.exe",
+			"group": "build",
+			"problemMatcher": [
+				"$gcc"
+			]
+		}
+	]
+}
