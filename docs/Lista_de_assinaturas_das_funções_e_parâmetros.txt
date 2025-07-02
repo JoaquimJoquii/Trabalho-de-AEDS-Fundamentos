@@ -11,9 +11,21 @@ funções subordinadas à funcionalidade(assinatura dos métodos):
 
     editarCompradores(char nome[100]): a função deve capturar um comprador em especifico de dentro do arquivo.txt usando do id e alterar seus dados
 -------------------------------------------------------------
-*Cadastro de Venda*: 
+*Cadastro de Venda*:  a funcionalidade deve permitir o cadastro, remoção, edição e apresentação dos objetos vendas cadastrados em "../arquivos/vendas.txt" de modo que os objetos já cadastrados não sejam afetados
 
 funções subordinadas à funcionalidade(assinatura dos métodos):
+
+void menuVendas():Função principal que exibe o menu e gerencia a navegação entre funcionalidades de vendas.
+
+void alterarVenda(): Edita uma venda existente. A venda é selecionada por de um id único pertencente a cada venda. Primeiro remove a venda antiga e depois recria com novos dados.
+
+void deletarVenda(): Remove uma venda específica do arquivo com base no seu código único.
+
+void listarVendas(): Lê e exibe no terminal todas as vendas armazenadas em "../../arquivos/vendas.txt"
+
+void novaVenda(): Cadastra uma nova venda, coletando dados do vendedor, comprador e itens, e grava em "../../arquivos/vendas.txt".
+
+int gerarCodigo(): Gera um número sequencial para o código da venda, salva o ultimo numero gerado em "../../arquivos/codigo.txt" para impedir a geração de um código duplicado.
 
 -------------------------------------------------------------
 *Cadastro de Produtos*: A funcionalidade deve permitir o cadastro, remoção, edição e apresentação dos objetos produtos cadastrados em "../arquivos/produtos.txt", de modo que os objetos já cadastrados não sejam afetados durante novas operações.
@@ -34,6 +46,10 @@ funções subordinadas à funcionalidade(assinatura dos métodos):
 funções subordinadas à funcionalidade(assinatura dos métodos):
 
 -------------------------------------------------------------
-*Emissão de Nota Fiscal e Cálculo de frete*: 
+*Emissão de Nota Fiscal e Cálculo de frete*: A funcionalidade deve permitir a emissão de notas fiscais em "../../arquivos/notas_fiscais.txt" contendo o comprador, o vendedor, os produtos e o frete
 
 funções subordinadas à funcionalidade(assinatura dos métodos):
+
+float calcularFrete(float valor): a funcionalidade calcula o frete com base no valor total dos itens fornecidos durante a venda, atribuindo o valor de 30,00 para total de até 100,00 nos produtos; 20,00 para total de 100,01 até 300,00 e acima de 300,00 o frete é gratis.
+
+void emitirNota():Emite uma nota fiscal em formato .txt com os dados da venda selecionada por meio de um código único atribuido para cada venda, e salva essa nota em ../../arquivos/nota_fiscal.txt

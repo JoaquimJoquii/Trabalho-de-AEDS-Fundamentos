@@ -1,3 +1,22 @@
 FUNCIONALIDADE: Cadastro de Compradores
 CASO 1: Arquivo vazio
-    
+
+| CASO | Funcionalidade     | Cenário                                  | Entrada                                       | Resultado Esperado                                            |
+| ---- | ------------------ | ---------------------------------------- | --------------------------------------------- | ------------------------------------------------------------- |
+|  01  | Nova Venda         | Inserir venda com um item                | vendedor: Ana, comprador: João, 1 caneta R\$2 | Venda salva com total correto e frete R\$30                   |
+|  02  | Nova Venda         | Inserir venda com múltiplos itens        | 2 itens: lápis R\$1 x5, borracha R\$2 x2      | Total e frete corretos, gravação formatada no arquivo         |
+|  03  | Nova Venda         | Inserir valor negativo                   | un: -1.0, qnt: 2                              | Mensagem de erro e nova solicitação de entrada                |
+|  04  | Listar Vendas      | Arquivo com vendas                       | —                                             | Lista de vendas exibida no terminal                           |
+|  05  | Listar Vendas      | Arquivo inexistente ou vazio             | —                                             | Mensagem de erro: "Erro ao abrir o arquivo de vendas"         |
+|  06  | Editar Venda       | Venda existente                          | código válido                                 | Dados da venda são atualizados corretamente                   |
+|  07  | Editar Venda       | Venda inexistente                        | código inválido                               | Mensagem: "Venda com o codigo X nao encontrada."              |
+|  08  | Excluir Venda      | Venda existente                          | código válido                                 | Venda removida do arquivo                                     |
+|  09  | Excluir Venda      | Venda inexistente                        | código inválido                               | Mensagem: "Venda com o código X não encontrada."              |
+|  10  | Emitir Nota Fiscal | Código de venda existente                | código válido                                 | Criação do arquivo `nota_fiscal.txt` com os dados da venda    |
+|  11  | Emitir Nota Fiscal | Código inexistente                       | código inválido                               | Mensagem de erro no terminal                                  |
+|  12  | Cálculo de Frete   | Total de R\$ 50,00                       | —                                             | Frete: R\$ 30,00                                              |
+|  13  | Cálculo de Frete   | Total de R\$ 150,00                      | —                                             | Frete: R\$ 20,00                                              |
+|  14  | Cálculo de Frete   | Total de R\$ 350,00                      | —                                             | Frete: R\$ 0,00                                               |
+|  15  | Código Sequencial  | `codigo.txt` ausente                     | —                                             | Código inicia em 1 e é salvo corretamente                     |
+|  16  | Código Sequencial  | Várias vendas                            | 5 chamadas para `novaVenda()`                 | Códigos 1, 2, 3, 4, 5 gerados e gravados                      |
+|  17  | Robustez           | Entrada de letras onde se espera números | letra no lugar de `int` ou `float`            | Comportamento inesperado ou falha do `scanf` (limitação do C) |
