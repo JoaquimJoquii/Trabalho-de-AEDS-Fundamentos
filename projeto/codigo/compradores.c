@@ -20,6 +20,8 @@ typedef struct compradores{
 } compradores;
 
 void cadastrarCompradores(int quant){
+    while(quant>0){
+        if(quant>0){
     int i, x;
     FILE *ptr = fopen("../../arquivos/compradores.txt", "a");
     if (ptr == NULL){
@@ -56,9 +58,8 @@ void cadastrarCompradores(int quant){
     }
 
     // loop para adicionar os dados recebidos no arquivo
-    for (i = 0; i < quant; i++)
-    {
-        fprintf(ptr, "%s\n%s%s%s%s%s%s%s",
+    for (i = 0; i < quant; i++){
+        fprintf(ptr, "%s%s%s%s%s%s%s%s",
                 clientes[i].nome,
                 clientes[i].cpf,
                 clientes[i].email,
@@ -67,8 +68,13 @@ void cadastrarCompradores(int quant){
                 clientes[i].endEntrega.bairro,
                 clientes[i].endEntrega.rua,
                 clientes[i].endEntrega.cep);
-    }
+        }
 
+        }else{
+        printf("entrada valida");
+    }
+    }   
+    
     x = fclose(ptr);
     if (x == EOF)
     {
@@ -84,12 +90,12 @@ void apresentarCompradores(){
         printf("abertura falhou\n");
         exit(1);
     }
-
+    int cont=0;
     compradores cliente;
     char linha[MAX_NOME];
 
     while (fgets(linha, sizeof(linha), ptr) != NULL){
-
+        cont++;
         strcpy(cliente.nome, linha);
 
         fgets(linha, sizeof(linha), ptr); // le o arquivo e passa pra variavel linha
@@ -126,11 +132,16 @@ void apresentarCompradores(){
     }
 
     x = fclose(ptr);
-    if (x == EOF)
-    {
+    if(cont==0){
+        printf("Nao existem compradores registrados no arquivo");
+    }else{
+        printf("Apresentação bem sucedida");
+    }
+    if (x == EOF){
         printf("fechamento falhou\n");
         exit(1);
     }
+
 }
 
 void editarCompradores(char nome[MAX_NOME]){

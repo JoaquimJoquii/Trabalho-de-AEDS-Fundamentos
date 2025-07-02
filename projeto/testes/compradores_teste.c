@@ -33,7 +33,7 @@ static MunitResult deletar_arquivo_vazio(const MunitParameter params[], void* fi
 static MunitResult deletar_sucesso(const MunitParameter params[], void* fixture){
     //abrindo um arquivo em branco e preenchendo ele com um comprador generico
     FILE *ptr = fopen("../../arquivos/compradores.txt", "w");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
 
     fprintf(ptr, "%s", NOME);
     for(int i=0; i<7; i++){
@@ -46,7 +46,7 @@ static MunitResult deletar_sucesso(const MunitParameter params[], void* fixture)
     
     //verificando se o nome ainda esta no arquivo
     ptr = fopen("../../arquivos/compradores.txt", "r");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
     
     char linha[MAX_NOME];
     while(fgets(linha, sizeof(linha), ptr) != NULL){
@@ -59,7 +59,7 @@ static MunitResult deletar_sucesso(const MunitParameter params[], void* fixture)
 static MunitResult deletar_inexistente(const MunitParameter params[], void* fixture) {
     //abrindo um arquivo em branco e preenchendo com um comprador generico
     FILE *ptr = fopen("../../arquivos/compradores.txt", "w");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
     
     fprintf(ptr, "Joao Carlos\n");  // Nome diferente do que será buscado
     for(int i = 0; i < 7; i++) {
@@ -69,27 +69,27 @@ static MunitResult deletar_inexistente(const MunitParameter params[], void* fixt
 
     //Redirecionamento de saída e execução
     FILE *temp_out = freopen("output.txt", "w", stdout);
-    munit_assert_not_null(temp_out);
+    assert_not_null(temp_out);
     
     deletarCompradores(NOME);// Nome que não existe no arquivo
     FILE *con_out = freopen("CON", "w", stdout);  // Restauração para Windows
-    munit_assert_not_null(con_out);
+    assert_not_null(con_out);
 
     //Verificação da mensagem impressa no arquivo
     ptr = fopen("output.txt", "r");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
     
     char mensagem[100];
     fgets(mensagem, sizeof(mensagem), ptr);
     fclose(ptr);
     
     mensagem[strcspn(mensagem, "\n")] = '\0';
-    munit_assert_string_equal(mensagem, "Comprador nao encontrado!");
+    assert_string_equal(mensagem, "Comprador nao encontrado!");
     remove("output.txt");
 
     //Verifica se o arquivo compradores continua igual
     ptr = fopen("../../arquivos/compradores.txt", "r");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
     
     int linhas = 0;
     char linha[MAX_NOME];
@@ -98,7 +98,7 @@ static MunitResult deletar_inexistente(const MunitParameter params[], void* fixt
     }
     fclose(ptr);
 
-    munit_assert_int(linhas, ==, 8);  // Deve manter 1 registro completo (8 linhas)
+    assert_int(linhas, ==, 8);  // Deve manter 1 registro completo (8 linhas)
 
     return MUNIT_OK;
 }
@@ -124,7 +124,7 @@ static MunitResult editar_arquivo_vazio(const MunitParameter params[], void* fix
 static MunitResult editar_sucesso(const MunitParameter params[], void* fixture){
     //abrindo um arquivo em branco e preenchendo ele com um comprador generico
     FILE *ptr = fopen("../../arquivos/compradores.txt", "w");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
 
     fprintf(ptr, "%s", NOME);
     for(int i=0; i<7; i++){
@@ -136,7 +136,7 @@ static MunitResult editar_sucesso(const MunitParameter params[], void* fixture){
     editarCompradores(NOME);
     //verificando se o nome ainda esta no arquivo
     ptr = fopen("../../arquivos/compradores.txt", "r");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
     
     char linha[MAX_NOME];
     while(fgets(linha, sizeof(linha), ptr) != NULL){
@@ -149,7 +149,7 @@ static MunitResult editar_sucesso(const MunitParameter params[], void* fixture){
 static MunitResult editar_inexistente(const MunitParameter params[], void* fixture) {
     //Cria arquivo com dados de teste 
     FILE *ptr = fopen("../../arquivos/compradores.txt", "w");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
     
     for (int i=0; i<2; i++){
         fprintf(ptr, "%s", NOME);
@@ -163,7 +163,7 @@ static MunitResult editar_inexistente(const MunitParameter params[], void* fixtu
     editarCompradores("Marco Julio");  // Nome que não existe
     freopen("CON", "w", stdout);  // Restaura stdout (Windows)
     ptr = fopen("output.txt", "r");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
     
     char mensagem[100];
     fgets(mensagem, sizeof(mensagem), ptr);
@@ -171,19 +171,92 @@ static MunitResult editar_inexistente(const MunitParameter params[], void* fixtu
     
     // Normaliza quebras de linha (Windows/Linux)
     mensagem[strcspn(mensagem, "\n")] = '\0';
-    munit_assert_string_equal(mensagem, "Comprador nao encontrado!");
+    assert_string_equal(mensagem, "Comprador nao encontrado!");
     remove("output.txt");
 
     //Verifica se o arquivo original permanece intacto
     ptr = fopen("../../arquivos/compradores.txt", "r");
-    munit_assert_not_null(ptr);
+    assert_not_null(ptr);
     
     int linhas = 0;
     char linha[MAX_NOME];
     while(fgets(linha, sizeof(linha), ptr) != NULL) linhas++;
     fclose(ptr);
     
-    munit_assert_int(linhas, ==, 16);  // 2 registros completos (8 linhas cada)
+    assert_int(linhas, ==, 16);  // 2 registros completos (8 linhas cada)
+
+    return MUNIT_OK;
+}
+
+//casos de teste de apresentação
+static MunitResult apresentacao_arquivo_vazio(const MunitParameter params[], void* fixture) {
+    //criando arquivos vazios
+    FILE *ptr = fopen("../../arquivos/compradores.txt", "w");
+    fclose(ptr);
+
+    freopen("output.txt", "w", stdout);
+    apresentarCompradores();  // Nome que não existe
+    freopen("CON", "w", stdout);  // Restaura stdout (Windows)
+    ptr = fopen("output.txt", "r");
+    assert_not_null(ptr);
+    
+    char mensagem[100];
+    fgets(mensagem, sizeof(mensagem), ptr);
+    fclose(ptr);
+    
+    // Normaliza quebras de linha (Windows/Linux)
+    mensagem[strcspn(mensagem, "\n")] = '\0';
+    assert_string_equal(mensagem, "Nao existem compradores registrados no arquivo");
+    remove("output.txt");
+
+    return MUNIT_OK;
+}
+static MunitResult apresentacao_arquivo_populado(const MunitParameter params[], void* fixture) {
+    //criando arquivos vazios
+    FILE *ptr = fopen("../../arquivos/compradores.txt", "w");
+    assert_not_null(ptr);
+    //inserindo pessoas nos arquivos
+    fprintf(ptr, "Joao Silva\n");
+    fprintf(ptr, "111.222.333-44\n");
+    fprintf(ptr, "joao@email.com\n");
+    fprintf(ptr, "SP\n");
+    fprintf(ptr, "Sao Paulo\n");
+    fprintf(ptr, "Centro\n");
+    fprintf(ptr, "Rua A\n");
+    fprintf(ptr, "01000-000\n");
+    
+    fprintf(ptr, "Maria Souza\n");
+    fprintf(ptr, "555.666.777-88\n");
+    fprintf(ptr, "maria@email.com\n");
+    fprintf(ptr, "RJ\n");
+    fprintf(ptr, "Rio de Janeiro\n");
+    fprintf(ptr, "Copacabana\n");
+    fprintf(ptr, "Av. B\n");
+    fprintf(ptr, "22000-000\n");
+
+    fclose(ptr);
+
+    freopen("output.txt", "w", stdout);
+    apresentarCompradores();
+    freopen("CON", "w", stdout);  // Restaura stdout (Windows)
+
+    ptr = fopen("output.txt", "r");
+    munit_assert_not_null(ptr);
+    
+    char mensagem[100];
+    fgets(mensagem, sizeof(mensagem), ptr);
+    fclose(ptr);
+    
+    // Normaliza quebras de linha
+    mensagem[strcspn(mensagem, "\n")] = '\0';
+    munit_assert_string_equal(mensagem, "Apresentacao bem sucedida");
+    remove("output.txt");
+
+    return MUNIT_OK;
+}
+
+//casos e teste de 
+static MunitResult exemplo(const MunitParameter params[], void* fixture) {
 
     return MUNIT_OK;
 }
@@ -192,9 +265,24 @@ static MunitResult editar_inexistente(const MunitParameter params[], void* fixtu
 
 
 
-
-
-
+//array de apresentadores
+static MunitTest apresentar_testes[] = {
+    {
+        "/apresentacao_arquivo_vazio",   // Nome do teste
+        apresentacao_arquivo_vazio,      // Função de teste
+        NULL,                       // Setup (opcional)
+        NULL,                       // Teardown (opcional)
+        MUNIT_TEST_OPTION_NONE     // Opções
+    },
+    {
+        "/apresentacao_arquivo_populado",
+        apresentacao_arquivo_populado,
+        NULL, 
+        NULL, 
+        MUNIT_TEST_OPTION_NONE
+    },
+    { NULL, NULL, NULL, 0, 0}
+};
 //array de casos de teste editar
 static MunitTest editar_testes[] = {
     {
@@ -220,7 +308,6 @@ static MunitTest editar_testes[] = {
     },
     { NULL, NULL, NULL, 0, 0}
 };
-
 //array de casos de teste deletar
 static MunitTest deletar_testes[] = {
     {
@@ -260,6 +347,13 @@ static MunitSuite suite[] = {
     {
         "/compradores_testes_editar",  
         editar_testes,                        
+        NULL,                          
+        1,                             
+        MUNIT_SUITE_OPTION_NONE
+    },
+    {
+        "/compradores_testes_apresentar",  
+        apresentar_testes,                        
         NULL,                          
         1,                             
         MUNIT_SUITE_OPTION_NONE
