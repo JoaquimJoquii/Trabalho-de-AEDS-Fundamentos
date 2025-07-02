@@ -1,5 +1,3 @@
-// produtos.h
-
 #ifndef PRODUTOS_H
 #define PRODUTOS_H
 
@@ -18,4 +16,4 @@ int alterarProduto(Produto produtos[], int qtdProdutos, Produto produtoAtualizad
 int excluirProduto(Produto produtos[], int *qtdProdutos, int codigo);
 void listarProdutos(Produto produtos[], int qtdProdutos);
 
-#endif // PRODUTOS_H
+#endif

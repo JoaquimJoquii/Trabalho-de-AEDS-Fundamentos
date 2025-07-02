@@ -6,7 +6,6 @@
 FILE *vendas;
 
 float calcularFrete(float valor){
-    float frete;
     if(valor<0){
         printf("erro, valor invalido!");
         return 0;
@@ -286,6 +285,7 @@ void novaVenda(){
     float un;
     int qnt,r,cod;
     float total;
+    float total;
 
     float totalItens = 0;
     float frete;
@@ -318,7 +318,7 @@ void novaVenda(){
         printf("Digite a quantidade do item: ");
         scanf("%d", &qnt);
         
-        total = un * qnt;
+        total = (float)(un * qnt);
         totalItens += total;
 
         fprintf(vendas, "itens:{\n");
@@ -369,19 +369,25 @@ void menuVendas(void) {
                 listarVendas();
                 break;
             }
-            case 4:
+            case 4:{
                 novaVenda();
                 break;
-            case 5:
+            }
+            case 5:{
                 emitirNota();
                 break;
-            case 0:
+            }
+            case 0:{
                 printf("Saindo do programa...\n");
                 break;
-            default:
+            }
+            default:{
                 printf("Opcao invalida! Tente novamente.\n");
+            }
         }
     } while (opcao != 0);
+
+    return 0;
 }
 
   

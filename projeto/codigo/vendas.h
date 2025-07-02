@@ -14,5 +14,5 @@ void novaVenda();
 int gerarCodigo();
 
 void menuVendas();
- 
+
 #endif
