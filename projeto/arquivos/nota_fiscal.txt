@@ -1,0 +1,12 @@
+
+===== NOTA FISCAL =====
+codigo: 1
+vendedor: jose
+comprador: jose
+itens:{
+    cod:1 nome:borracha un:8.00 qnt:5 total:40.00
+}
+total dos itens:40.00 frete:30.00 
+total da compra=70.00
+
+========================

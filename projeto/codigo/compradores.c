@@ -332,3 +332,49 @@ void deletarCompradores(char nome[MAX_NOME]){
     }
 
 }
+
+void menuCompradores() {
+    int opcao, i;
+    char nome[MAX_NOME];
+    do {
+        // Exibe o menu
+        printf("\n===== MENU =====\n");
+        printf("1. Editar Compradores\n");
+        printf("2. Deletar Compradores\n");
+        printf("3. Apresentar Compradores\n");
+        printf("4. Cadastrar Compradores\n");
+        printf("0. Sair\n");
+        printf("=================\n");
+        printf("Escolha uma opcao: ");
+        // Lê a opção do usuário
+        scanf("%d", &opcao);
+        switch(opcao) {
+            case 1: {
+                printf("Digite o nome do comprador que deseja editar: ");
+                fgets(nome, MAX_NOME, stdin);
+                editarCompradores(nome);
+                break;
+            }
+            case 2: {
+                printf("Digite o nome do comprador que deseja deletar: ");
+                fgets(nome, MAX_NOME, stdin);
+                deletarCompradores(nome);
+                break;
+            }
+            case 3: {
+                apresentarCompradores();
+                break;
+            }
+            case 4:
+                printf("Quantos compradores deseja cadastrar? ");
+                scanf("%d", &i);
+                cadastrarCompradores(i);
+                break;
+            case 0:
+                printf("Saindo do programa...\n");
+                break;
+            default:
+                printf("Opcao invalida! Tente novamente.\n");
+        }
+    } while (opcao != 0);
+}

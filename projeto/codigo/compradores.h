@@ -12,4 +12,5 @@ void cadastrarCompradores(int quant);
 
 void editarCompradores(char nome[100]);
 
+void menuCompradores();
 #endif
