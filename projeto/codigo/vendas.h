@@ -15,4 +15,11 @@ int gerarCodigo();
 
 void menuVendas();
 
+int buscarVendedorPorCodigo(int codigoBuscado, char *nome);
+
+int buscarCompradorPorNome(const char *nome, char *saida);
+
+int buscarProdutoPorCodigo(int codigoBuscado, char *nome, float *preco, int *quantidade);
+
+void emitirNota();
 #endif

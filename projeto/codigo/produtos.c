@@ -121,6 +121,25 @@ int carregarProdutosDeArquivo(Produto produtos[], int *qtdProdutos) {
     return 1;
 }
 
+// Atualiza o estoque de um produto no arquivo produtos.txt
+int atualizarEstoqueProduto(int codigo, int novaQuantidade) {
+    Produto produtos[100];
+    int qtdProdutos = 0;
+    if (!carregarProdutosDeArquivo(produtos, &qtdProdutos)) return 0;
+    int encontrado = 0;
+    for (int i = 0; i < qtdProdutos; i++) {
+        if (produtos[i].codigo == codigo) {
+            produtos[i].quantidade = novaQuantidade;
+            encontrado = 1;
+            break;
+        }
+    }
+    if (encontrado) {
+        salvarProdutosEmArquivo(produtos, qtdProdutos);
+    }
+    return encontrado;
+}
+
 void menuProdutos() {
     Produto produtos[100];
     int qtdProdutos = 0;

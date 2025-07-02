@@ -1,0 +1,10 @@
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+codigo: -1
+vendedor: jose
+comprador: jose
+itens:{
+    cod:1 nome:a un:4.00 qnt:4 total:16.00
+}
+total dos itens:16.00 frete:30.00 
+total da compra=46.00
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
