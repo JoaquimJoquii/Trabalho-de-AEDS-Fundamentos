@@ -5,10 +5,9 @@
 #include "vendas.h"
 #include "vendedores.h"
 
+#include "produtos.h"
 
-int main(){    
-    char nome[100];
-    scanf("%s", nome);
-    deletarCompradores(nome);
+int main() {
+    menuVendas();
     return 0;
 }
