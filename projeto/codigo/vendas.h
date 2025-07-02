@@ -11,6 +11,8 @@ void listarVendas();
 
 void novaVenda();
 
+int gerarCodigo();
+
 void menuVendas();
  
 #endif

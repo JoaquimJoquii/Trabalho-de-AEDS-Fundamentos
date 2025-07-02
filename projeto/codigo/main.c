@@ -4,7 +4,7 @@
 #include "compradores.h"
 #include "vendas.h"
 
-int main(){    
-
+int main() {
+    menuVendas();
     return 0;
 }

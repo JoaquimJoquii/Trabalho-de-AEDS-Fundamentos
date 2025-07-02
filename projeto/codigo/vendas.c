@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <string.h>
-#include <math.h>
 #include <stdlib.h>
+#include <string.h>
 #include "vendas.h"
 
 FILE *vendas;
@@ -21,7 +20,7 @@ float calcularFrete(float valor) {
 }
 
 int gerarCodigo() {
-    FILE *arquivo = fopen("../../arquivos/codigo.txt", "r+");  // abre para leitura/escrita
+    FILE *arquivo = fopen("c../../arquivos/codigo.txt", "r+");  // abre para leitura/escrita
     int codigo;
 
     // Se o arquivo não existe, cria e começa do 1
@@ -229,6 +228,53 @@ void listarVendas() {
     system("pause");
 }
 
+void emitirNota(){
+    int codigoVenda;
+    printf("Digite o codigo da venda para emitir a nota: ");
+    scanf("%d", &codigoVenda);
+
+    vendas = fopen("../../arquivos/vendas.txt", "r");
+    if (vendas == NULL) {
+        printf("Erro ao abrir o arquivo de vendas.\n");
+        return;
+    }
+
+    char linha[256];
+    int vendaEncontrada = 0;
+    FILE *notaFiscal;
+    notaFiscal = fopen("../../arquivos/nota_fiscal.txt", "w");
+    if (notaFiscal == NULL) {
+        printf("Erro ao criar o arquivo de nota fiscal.\n");
+        fclose(vendas);
+        return;
+    }
+    while (fgets(linha, sizeof(linha), vendas) != NULL) {
+        if (strstr(linha, "codigo:")) {
+            int codigo;
+            sscanf(linha, "codigo: %d", &codigo);
+            if (codigo == codigoVenda) {
+                vendaEncontrada = 1;
+                fprintf(notaFiscal,"\n===== NOTA FISCAL =====\n");
+                fprintf(notaFiscal,"%s", linha);
+                while (fgets(linha, sizeof(linha), vendas) != NULL && !strstr(linha, "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")) {
+                    fprintf(notaFiscal,"%s", linha);
+                }
+                fprintf(notaFiscal,"\n========================\n");
+                break;
+            }
+        }
+    }
+    fclose(notaFiscal);
+    fclose(vendas);
+
+    if (!vendaEncontrada) {
+        printf("Venda com o codigo %d nao encontrada.\n", codigoVenda);
+    }
+    printf("nota fiscal emitida com sucesso!\n");
+    system("pause");
+    return;
+}
+
 void novaVenda() {
     char vendedor[100];
     char comprador[100];
@@ -301,7 +347,8 @@ int menuVendas() {
         printf("2. Deletar venda\n");
         printf("3. Listar vendas\n");
         printf("4. Nova venda\n");
-        printf("5. Sair\n");
+        printf("5. Emitir nota fiscal\n");
+        printf("0. Sair\n");
         printf("=================\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
@@ -320,13 +367,16 @@ int menuVendas() {
                 novaVenda();
                 break;
             case 5:
+                emitirNota();
+                break;
+            case 0:
                 printf("Saindo do programa...\n");
                 break;
             default:
                 printf("Opcao invalida! Tente novamente.\n");
                 system("pause");
         }
-    } while (opcao != 5);
+    } while (opcao != 0);
 
     return 0;
 }
