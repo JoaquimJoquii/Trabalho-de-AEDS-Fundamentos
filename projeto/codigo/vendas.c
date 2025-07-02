@@ -54,7 +54,6 @@ void alterarVenda() {
 
     if (original == NULL || temp == NULL) {
         printf("Erro ao abrir os arquivos!\n");
-        return;
     }
 
     char linha[512];
@@ -91,7 +90,6 @@ void alterarVenda() {
     if (!vendaEncontrada) {
         printf("Venda com o codigo %d nao encontrada.\n", codigoAlvo);
         system("pause");
-        return;
     }
 
     // Recria a venda com mesmo código
@@ -170,7 +168,6 @@ void deletarVenda() {
 
     if (original == NULL || temp == NULL) {
         printf("Erro ao abrir os arquivos!\n");
-        return;
     }
 
     char linha[512];
@@ -215,7 +212,6 @@ void listarVendas() {
     vendas = fopen("../../arquivos/vendas.txt", "r");
     if (vendas == NULL) {
         printf("Erro ao abrir o arquivo de vendas.\n");
-        return;
     }
     char linha[256];// Buffer para armazenar cada linha lida do arquivo
     // Lê e exibe cada linha do arquivo
@@ -236,7 +232,6 @@ void emitirNota(){
     vendas = fopen("../../arquivos/vendas.txt", "r");
     if (vendas == NULL) {
         printf("Erro ao abrir o arquivo de vendas.\n");
-        return;
     }
 
     char linha[256];
@@ -246,7 +241,6 @@ void emitirNota(){
     if (notaFiscal == NULL) {
         printf("Erro ao criar o arquivo de nota fiscal.\n");
         fclose(vendas);
-        return;
     }
     while (fgets(linha, sizeof(linha), vendas) != NULL) {
         if (strstr(linha, "codigo:")) {
@@ -284,7 +278,6 @@ void novaVenda(){
     char nome[256];
     float un;
     int qnt,r,cod;
-    float total;
     float total;
 
     float totalItens = 0;
@@ -386,8 +379,6 @@ void menuVendas(void) {
             }
         }
     } while (opcao != 0);
-
-    return 0;
 }
 
   

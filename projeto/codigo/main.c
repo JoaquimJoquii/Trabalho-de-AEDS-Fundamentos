@@ -10,6 +10,7 @@
 int main() {
     int opcao;
     do {
+        system("cls");
         // Exibe o menu
         printf("\n===== MENU =====\n");
         printf("1. Produtos\n");
@@ -23,7 +24,7 @@ int main() {
         scanf("%d", &opcao);
         switch(opcao) {
             case 1: {
-                menuProdutos();
+                //menuProdutos();
                 break;
             }
             case 2: {

@@ -4,13 +4,13 @@
 #define MAX_NOME 100
 #define MAX_CPF 12
 
-void apresentarCompradores();
+int apresentarCompradores();
 
-void deletarCompradores(char nome[100]);
+int deletarCompradores(char nome[100]);
 
-void cadastrarCompradores(int quant);
+int cadastrarCompradores(int quant);
 
-void editarCompradores(char nome[100]);
+int editarCompradores(char nome[100]);
 
-void menuCompradores();
+int menuCompradores();
 #endif
