@@ -285,7 +285,7 @@ void novaVenda(){
     char nome[256];
     float un;
     int qnt,r,cod;
-    float total = un * qnt;
+    float total;
 
     float totalItens = 0;
     float frete;
@@ -294,11 +294,9 @@ void novaVenda(){
     vendas = fopen("vendas.txt", "a");
     if (vendas == NULL) {
         printf("Erro ao criar o arquivo!\n");
-        return 0;
     }
     // Coletando dados da venda
-    printf("Digite o codigo da venda: ");
-    scanf("%d", &codigoVenda);
+    codigoVenda = gerarCodigo();
     printf("Digite o nome do vendedor: ");
     scanf(" %s", vendedor);
     printf("Digite o nome do comprador: ");
@@ -340,7 +338,7 @@ void novaVenda(){
 
     printf("venda salva com sucesso!\n");
     system("pause"); 
-    return 0;
+
 }
 
 void menuVendas(void) {
@@ -364,7 +362,7 @@ void menuVendas(void) {
                 break;
             }
             case 2: {
-                detetarVenda();
+                deletarVenda();
                 break;
             }
             case 3: {
@@ -380,11 +378,10 @@ void menuVendas(void) {
             case 0:
                 printf("Saindo do programa...\n");
                 break;
-            }
             default:
                 printf("Opcao invalida! Tente novamente.\n");
         }
     } while (opcao != 0);
-
-    return 0;
 }
+
+  
