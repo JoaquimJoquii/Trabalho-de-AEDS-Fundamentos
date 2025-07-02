@@ -9,10 +9,4 @@ void excluir();
 void registrar_venda();
 void menuVendedores();
 
-
-
-
-
-
-
 #endif

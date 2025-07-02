@@ -70,15 +70,15 @@ int cadastrarCompradores(int quant){
                     clientes[i].endEntrega.cep);
         }
     }else{
-        printf("entrada invalida");
+        printf("\nentrada invalida\n");
         return 1;
     }
     x = fclose(ptr);
     if (x == EOF){
-        printf("fechamento falhou\n");
+        printf("\nfechamento falhou\n");
         exit(-1);
     }
-    printf("\nCadastro concluido com sucesso");
+    printf("\nCadastro concluido com sucesso\n");
     system("pause");
     return 0;
 }
@@ -270,20 +270,20 @@ int editarCompradores(char nome[MAX_NOME]){
     fclose(temp);
 
     if(cont==0){
-        printf("Nao existem compradores registrados no arquivo");
+        printf("\nNao existem compradores registrados no arquivo\n");
         remove("../../arquivos/temp.txt");
         system("pause");
         return 1;
     }else{
         if (!find){
-            printf("Comprador nao encontrado!\n");
+            printf("\nComprador nao encontrado!\n");
             remove("../../arquivos/temp.txt");
             system("pause");
             return 1;
         }else{
             remove("../../arquivos/compradores.txt");
             rename("../../arquivos/temp.txt", "../../arquivos/compradores.txt");
-            printf("Edição concluida com sucesso!\n");
+            printf("\nEdição concluida com sucesso!\n");
             system("pause");
             return 0;
         }
@@ -327,13 +327,13 @@ int deletarCompradores(char nome[MAX_NOME]){
     fclose(temp);
 
     if(cont==0){
-        printf("Nao existem compradores registrados com esse nome no arquivo");
+        printf("\nNao existem compradores registrados neste arquivo\n");
         remove("../../arquivos/temp.txt");
         system("pause");
         return 1;
     }else{
         if(!find){
-            printf("Comprador nao encontrado!\n");
+            printf("\nComprador nao encontrado!\n");
             remove("../../arquivos/temp.txt");
             system("pause");
             return 1;
@@ -341,7 +341,7 @@ int deletarCompradores(char nome[MAX_NOME]){
         else{
             remove("../../arquivos/compradores.txt");
             rename("../../arquivos/temp.txt", "../../arquivos/compradores.txt");
-            printf("Comprador deletado com sucesso!\n");
+            printf("\nComprador deletado com sucesso!\n");
             system("pause");
             return 0;
         }

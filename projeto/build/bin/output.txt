@@ -1,19 +1,2 @@
---------------------------------------
-Nome: Joao Silva
-CPF: 111.222.333-joao@email.com
-Email: joao@email.com
-Estado: SP
-Cidade: Sao Paulo
-Bairro: Centro
-Rua: Rua A
-CEP: 01000-000
---------------------------------------
-Nome: Maria Souza
-CPF: 555.666.777-maria@email.com
-Email: maria@email.com
-Estado: RJ
-Cidade: Rio de Janeiro
-Bairro: Copacabana
-Rua: Av. B
-CEP: 22000-000
-Apresentação bem sucedida
+Pressione qualquer tecla para continuar. . . 
+Comprador nao encontrado!
