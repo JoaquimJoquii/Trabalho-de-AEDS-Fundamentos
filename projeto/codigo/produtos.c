@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "produtos.h"
 
 // Função: cadastrarProduto
@@ -47,7 +48,6 @@ int alterarProduto(Produto produtos[], int qtdProdutos, Produto produtoAtualizad
     }
 
     if (indice == -1) return 0;
-
     strcpy(produtos[indice].nome, produtoAtualizado.nome);
     produtos[indice].quantidade = produtoAtualizado.quantidade;
     produtos[indice].preco = produtoAtualizado.preco;

@@ -22,16 +22,14 @@ typedef struct compradores{
 void cadastrarCompradores(int quant){
     int i, x;
     FILE *ptr = fopen("../../arquivos/compradores.txt", "a");
-    if (ptr == NULL)
-    {
+    if (ptr == NULL){
         printf("abertura falhou\n");
         exit(1);
     }
     compradores clientes[quant];
 
     // loop para a entrada de dados pelo usuario
-    for (i = 0; i < quant; i++)
-    {
+    for (i = 0; i < quant; i++){
         printf("digite o nome do %d comprador: ", i + 1);
         fgets(clientes[i].nome, MAX_NOME, stdin);
 
@@ -60,7 +58,7 @@ void cadastrarCompradores(int quant){
     // loop para adicionar os dados recebidos no arquivo
     for (i = 0; i < quant; i++)
     {
-        fprintf(ptr, "%s%s%s%s%s%s%s%s",
+        fprintf(ptr, "%s\n%s%s%s%s%s%s%s",
                 clientes[i].nome,
                 clientes[i].cpf,
                 clientes[i].email,
@@ -82,8 +80,7 @@ void cadastrarCompradores(int quant){
 void apresentarCompradores(){
     int x;
     FILE *ptr = fopen("../../arquivos/compradores.txt", "r");
-    if (ptr == NULL)
-    {
+    if (ptr == NULL){
         printf("abertura falhou\n");
         exit(1);
     }
@@ -91,8 +88,7 @@ void apresentarCompradores(){
     compradores cliente;
     char linha[MAX_NOME];
 
-    while (fgets(linha, sizeof(linha), ptr) != NULL)
-    {
+    while (fgets(linha, sizeof(linha), ptr) != NULL){
 
         strcpy(cliente.nome, linha);
 
@@ -137,25 +133,23 @@ void apresentarCompradores(){
     }
 }
 
-void editarCompradores(char nome[MAX_NOME])
-{
+void editarCompradores(char nome[MAX_NOME]){
     FILE *ptr = fopen("../../arquivos/compradores.txt", "r");
     FILE *temp = fopen("../../arquivos/temp.txt", "w");
 
-    if (ptr == NULL || temp == NULL)
-    {
+    if (ptr == NULL || temp == NULL){
         printf("Erro ao abrir arquivos\n");
         exit(1);
     }
 
     compradores cliente;
     char linha[MAX_NOME];
-    int find = 0;
+    int find=0, cont=0;
 
-    while(fgets(linha, sizeof(linha), ptr) != NULL)
-    {
+    while(fgets(linha, sizeof(linha), ptr) != NULL){
         if (strcmp(linha, nome) == 0){
-            find = 1;
+            cont++;
+            find++;
             strcpy(cliente.nome, linha); // copia o nome que esta em linha para cliente.nome
 
             fgets(linha, sizeof(linha), ptr);
@@ -243,16 +237,14 @@ void editarCompradores(char nome[MAX_NOME])
                     cliente.endEntrega.rua,
                     cliente.endEntrega.cep);
         }
-        else
-        {
+        else{
+            cont++;
             // Copia os dados originais para o arquivo temporário
             fprintf(temp, "%s", linha);
 
             // Copia as próximas 7 linhas
-            for (int i = 0; i < 7; i++)
-            {
-                if (fgets(linha, sizeof(linha), ptr) != NULL)
-                {
+            for (int i = 0; i < 7; i++){
+                if (fgets(linha, sizeof(linha), ptr) != NULL){
                     fprintf(temp, "%s", linha);
                 }
             }
@@ -262,16 +254,18 @@ void editarCompradores(char nome[MAX_NOME])
     fclose(ptr);
     fclose(temp);
 
-    if (!find)
-    {
-        printf("Comprador nao encontrado!\n");
+    if(cont==0){
+        printf("Nao existem compradores registrados no arquivo");
         remove("../../arquivos/temp.txt");
-    }
-    else
-    {
-        remove("../../arquivos/compradores.txt");
-        rename("../../arquivos/temp.txt", "../../arquivos/compradores.txt");
-        printf("Comprador atualizado com sucesso!\n");
+    }else{
+        if (!find){
+            printf("Comprador nao encontrado!\n");
+            remove("../../arquivos/temp.txt");
+        }else{
+            remove("../../arquivos/compradores.txt");
+            rename("../../arquivos/temp.txt", "../../arquivos/compradores.txt");
+            printf("Comprador atualizado com sucesso!\n");
+        }
     }
 }
 
@@ -312,9 +306,10 @@ void deletarCompradores(char nome[MAX_NOME]){
     fclose(temp);
 
     if(cont==0){
-        printf("Não existem compradores registrados no arquivo");
+        printf("Nao existem compradores registrados no arquivo");
+        remove("../../arquivos/temp.txt");
     }else{
-        if (!find){
+        if(!find){
             printf("Comprador nao encontrado!\n");
             remove("../../arquivos/temp.txt");
         }

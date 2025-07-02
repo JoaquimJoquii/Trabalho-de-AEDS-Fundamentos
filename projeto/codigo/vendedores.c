@@ -114,7 +114,7 @@ printf("Venda registrada! Comissao de %.2f adicionada ao salario.\n", comissao);
 printf("Vendedor nao encontrado.\n");
     }
 }
-int main() {
+int menuVendedores() {
 int opcao;
 do {
 printf("\n--- Menu Vendedores ---\n");

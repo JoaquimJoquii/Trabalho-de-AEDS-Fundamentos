@@ -5,7 +5,7 @@ float calcularFrete(float valor);
 
 void alterarVenda();
 
-void detetarVenda();
+void deletarVenda();
 
 void listarVendas();
 
@@ -14,5 +14,5 @@ void novaVenda();
 int gerarCodigo();
 
 void menuVendas();
- 
+
 #endif

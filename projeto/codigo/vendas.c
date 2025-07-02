@@ -6,7 +6,6 @@
 FILE *vendas;
 
 float calcularFrete(float valor){
-    float frete;
     if(valor<0){
         printf("erro, valor invalido!");
         return 0;
@@ -285,7 +284,7 @@ void novaVenda(){
     char nome[256];
     float un;
     int qnt,r,cod;
-    float total = un * qnt;
+    float total;
 
     float totalItens = 0;
     float frete;
@@ -294,7 +293,6 @@ void novaVenda(){
     vendas = fopen("vendas.txt", "a");
     if (vendas == NULL) {
         printf("Erro ao criar o arquivo!\n");
-        return 0;
     }
     // Coletando dados da venda
     printf("Digite o codigo da venda: ");
@@ -320,7 +318,7 @@ void novaVenda(){
         printf("Digite a quantidade do item: ");
         scanf("%d", &qnt);
         
-        total = un * qnt;
+        total = (float)(un * qnt);
         totalItens += total;
 
         fprintf(vendas, "itens:{\n");
@@ -339,8 +337,6 @@ void novaVenda(){
     fclose(vendas);
 
     printf("venda salva com sucesso!\n");
-    system("pause"); 
-    return 0;
 }
 
 void menuVendas(void) {
@@ -364,27 +360,28 @@ void menuVendas(void) {
                 break;
             }
             case 2: {
-                detetarVenda();
+                deletarVenda();
                 break;
             }
             case 3: {
                 listarVendas();
                 break;
             }
-            case 4:
+            case 4:{
                 novaVenda();
                 break;
-            case 5:
+            }
+            case 5:{
                 emitirNota();
                 break;
-            case 0:
+            }
+            case 0:{
                 printf("Saindo do programa...\n");
                 break;
             }
-            default:
+            default:{
                 printf("Opcao invalida! Tente novamente.\n");
+            }
         }
-    } while (opcao != 0);
-
-    return 0;
+    } while(opcao != 0);
 }
