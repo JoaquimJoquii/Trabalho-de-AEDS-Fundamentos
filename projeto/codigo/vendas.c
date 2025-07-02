@@ -5,10 +5,10 @@
 
 FILE *vendas;
 
-float calcularFrete(float valor) {
-    // Calcula o frete baseado no valor total da compra
-    if (valor < 0) {
-        printf("Erro: valor invalido!\n");
+float calcularFrete(float valor){
+    float frete;
+    if(valor<0){
+        printf("erro, valor invalido!");
         return 0;
     }
     if (valor <= 100)
@@ -218,7 +218,8 @@ void listarVendas() {
         printf("Erro ao abrir o arquivo de vendas.\n");
         return;
     }
-    char linha[256];
+    char linha[256];// Buffer para armazenar cada linha lida do arquivo
+    // Lê e exibe cada linha do arquivo
     printf("\n===== LISTA DE VENDAS =====\n");
     while (fgets(linha, sizeof(linha), vendas) != NULL) {
         printf("%s", linha);
@@ -275,94 +276,101 @@ void emitirNota(){
     return;
 }
 
-void novaVenda() {
-    char vendedor[100];
-    char comprador[100];
-    int cod, qnt, maisItens,codigoVenda;
-    char nome[100];
-    float un, total, totalItens = 0, frete;
+void novaVenda(){
+    int codigoVenda;
+    char vendedor[256];
+    char comprador[256];
+    
+    // Itens
+    char nome[256];
+    float un;
+    int qnt,r,cod;
+    float total = un * qnt;
 
-    vendas = fopen("../../arquivos/vendas.txt", "a");
+    float totalItens = 0;
+    float frete;
+
+    // Abrindo o arquivo para escrita
+    vendas = fopen("vendas.txt", "a");
     if (vendas == NULL) {
-        printf("Erro ao abrir/criar o arquivo!\n");
-        return;
+        printf("Erro ao criar o arquivo!\n");
+        return 0;
     }
-    codigoVenda = gerarCodigo();
+    // Coletando dados da venda
+    printf("Digite o codigo da venda: ");
+    scanf("%d", &codigoVenda);
     printf("Digite o nome do vendedor: ");
-    scanf(" %[^\n]", vendedor);
+    scanf(" %s", vendedor);
     printf("Digite o nome do comprador: ");
-    scanf(" %[^\n]", comprador);
+    scanf(" %s", comprador);
 
+    // Escrevendo no arquivo
     fprintf(vendas, "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
     fprintf(vendas, "codigo: %d\n", codigoVenda);
     fprintf(vendas, "vendedor: %s\n", vendedor);
     fprintf(vendas, "comprador: %s\n", comprador);
-    fprintf(vendas, "itens:{\n");
-
-    do {
+    // Coletando dados dos itens e salvando no arquivo
+    do{
         printf("Digite o codigo do item: ");
         scanf("%d", &cod);
         printf("Digite o nome do item: ");
-        scanf(" %[^\n]", nome);
-        do{// Loop para garantir que o valor unitário e a quantidade sejam positivos
-            un = -1; // Inicializa un com um valor negativo para entrar no loop
-            qnt = -1; // Inicializa qnt com um valor negativo para entrar no loop
-            printf("Digite o valor unitario do item: ");
-            scanf("%f", &un);
-            printf("Digite a quantidade do item: ");
-            scanf("%d", &qnt);
-                if(un < 0 || qnt < 0) {
-                    printf("Erro: valor unitario e quantidade devem ser positivos.\n");
-                }
-        }while ((qnt < 0)||(un < 0));
-
+        scanf(" %s", nome);
+        printf("Digite o valor unitario do item: ");
+        scanf("%f", &un);
+        printf("Digite a quantidade do item: ");
+        scanf("%d", &qnt);
+        
         total = un * qnt;
         totalItens += total;
 
+        fprintf(vendas, "itens:{\n");
         fprintf(vendas, "    cod:%d nome:%s un:%.2f qnt:%d total:%.2f\n", cod, nome, un, qnt, total);
+        fprintf(vendas, "}\n");
 
-        printf("Deseja adicionar mais itens? (1 - Sim / 0 - Não): ");
-        scanf("%d", &maisItens);
-
-    } while (maisItens == 1);
-
+        printf("Deseja adicionar mais itens? (1-sim/0-nao): ");
+        scanf("%d", &r);
+    } while(r == 1);
+    //calculando o frete
     frete = calcularFrete(totalItens);
-
-    fprintf(vendas, "}\n");
     fprintf(vendas, "total dos itens:%.2f frete:%.2f \n", totalItens, frete);
     fprintf(vendas, "total da compra=%.2f\n", totalItens + frete);
     fprintf(vendas, "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 
     fclose(vendas);
 
-    printf("Venda salva com sucesso! Cod: %d\n",codigoVenda);
-    system("pause");
+    printf("venda salva com sucesso!\n");
+    system("pause"); 
+    return 0;
 }
 
-int menuVendas() {
+void menuVendas(void) {
     int opcao;
     do {
+        // Exibe o menu
         printf("\n===== MENU =====\n");
-        printf("1. Editar venda\n");
-        printf("2. Deletar venda\n");
+        printf("1. Editar Vendas\n");
+        printf("2. Deletar vendas\n");
         printf("3. Listar vendas\n");
         printf("4. Nova venda\n");
         printf("5. Emitir nota fiscal\n");
         printf("0. Sair\n");
         printf("=================\n");
         printf("Escolha uma opcao: ");
+        // Lê a opção do usuário
         scanf("%d", &opcao);
-
-        switch (opcao) {
-            case 1:
+        switch(opcao) {
+            case 1: {
                 alterarVenda();
                 break;
-            case 2:
-                deletarVenda();
+            }
+            case 2: {
+                detetarVenda();
                 break;
-            case 3:
+            }
+            case 3: {
                 listarVendas();
                 break;
+            }
             case 4:
                 novaVenda();
                 break;
@@ -372,9 +380,9 @@ int menuVendas() {
             case 0:
                 printf("Saindo do programa...\n");
                 break;
+            }
             default:
                 printf("Opcao invalida! Tente novamente.\n");
-                system("pause");
         }
     } while (opcao != 0);
 

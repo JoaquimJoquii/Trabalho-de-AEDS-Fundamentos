@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "compradores.h"
 #include "vendas.h"
+#include "vendedores.h"
+
 #include "produtos.h"
 
 int main() {
