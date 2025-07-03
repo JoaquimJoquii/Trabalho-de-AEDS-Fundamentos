@@ -9,4 +9,10 @@ void excluir();
 void registrar_venda();
 void menuVendedores();
 
+struct vendedores
+{
+    int numero;
+    char nome[50];
+    float salario_fixo;
+};
 #endif
