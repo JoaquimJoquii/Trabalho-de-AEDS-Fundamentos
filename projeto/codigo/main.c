@@ -24,19 +24,23 @@ int main() {
         scanf("%d", &opcao);
         switch(opcao) {
             case 1: {
-                //menuProdutos();
+                menuProdutos();
+                system("cls");
                 break;
             }
             case 2: {
                 menuCompradores();
+                system("cls");
                 break;
             }
             case 3: {
                 menuVendas();
+                system("cls");
                 break;
             }
             case 4:
                 menuVendedores();
+                system("cls");
                 break;
             case 0:
                 printf("Saindo do programa...\n");
